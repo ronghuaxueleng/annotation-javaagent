@@ -128,9 +128,14 @@ public class AnnotationUtils {
     ClassFile classFile = cc.getClassFile();
     ConstPool constPool = classFile.getConstPool();
 
+    AnnotationsAttribute attributeInfo;
     // 从这里取出原本类中的注解 建议DEBUG看下attributes中的数据
     List<AttributeInfo> attributes = classFile.getAttributes();
-    AnnotationsAttribute attributeInfo = (AnnotationsAttribute) attributes.get(1);
+    if (attributes.size() > 1) {
+      attributeInfo = (AnnotationsAttribute) attributes.get(1);
+    } else {
+      attributeInfo = new AnnotationsAttribute(constPool, AnnotationsAttribute.visibleTag);
+    }
     // 添加新的注解
     Annotation annotation = new Annotation(annoName, constPool);
     attributeInfo.addAnnotation(getAnnotation(constPool, annotation, fieldName, fieldValue));
@@ -140,9 +145,16 @@ public class AnnotationUtils {
     ClassFile classFile = cc.getClassFile();
     ConstPool constPool = classFile.getConstPool();
 
+    AnnotationsAttribute attributeInfo;
     // 从这里取出原本类中的注解 建议DEBUG看下attributes中的数据
     List<AttributeInfo> attributes = classFile.getAttributes();
-    AnnotationsAttribute attributeInfo = (AnnotationsAttribute) attributes.get(1);
+    if (attributes.size() > 1) {
+      attributeInfo = (AnnotationsAttribute) attributes.get(1);
+    } else {
+      attributeInfo = new AnnotationsAttribute(constPool, AnnotationsAttribute.visibleTag);
+      classFile.addAttribute(attributeInfo);
+    }
+
     // 添加新的注解
     Annotation annotation = new Annotation(annoName, constPool);
     attributeInfo.addAnnotation(getAnnotation(constPool, annotation, attrs));
@@ -195,6 +207,9 @@ public class AnnotationUtils {
     MethodInfo methodInfo = ctMethod.getMethodInfo();
     ConstPool constPool = methodInfo.getConstPool();
     AnnotationsAttribute attr = (AnnotationsAttribute) methodInfo.getAttribute(AnnotationsAttribute.visibleTag);
+    if (attr == null) {
+      attr = new AnnotationsAttribute(constPool, AnnotationsAttribute.visibleTag);
+    }
     Annotation annotation = new Annotation(annoName, constPool);
     attr.addAnnotation(getAnnotation(constPool, annotation, attrs));
     methodInfo.addAttribute(attr);

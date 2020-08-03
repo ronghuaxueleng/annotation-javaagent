@@ -1,0 +1,16 @@
+{
+    "test": {
+        "fullClassName": "io.github.ronghuaxueleng.test.Test",
+        "annotations": [{
+            "name": "io.swagger.annotations.Api",
+            "attrs": [{ "attrValue": ["专病应用"], "attrName": "tags" }]
+        }],
+        "list": [{
+            "method": "update",
+            "annotations": [{
+                "name": "io.swagger.annotations.ApiOperation",
+                "attrs": [{ "attrValue": "更新", "attrName": "value" }]
+            }]
+        }]
+    }
+}

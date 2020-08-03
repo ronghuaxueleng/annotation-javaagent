@@ -29,3 +29,26 @@ java -javaagent:E:/javaagent.jar=-f=E:/annos.json,-d=E:/test -jar xxx.jar
 > ​	-d：保存处理后的class文件的绝对路径
 >
 > ​	-h：查看参数说明
+
+`annos.json`文件格式如下：
+
+```json
+{
+    "test": {
+        "fullClassName": "io.github.ronghuaxueleng.test.Test",
+        "annotations": [{
+            "name": "io.swagger.annotations.Api",
+            "attrs": [{ "attrValue": ["专病应用"], "attrName": "tags" }]
+        }],
+        "list": [{
+            "method": "update",
+            "annotations": [{
+                "name": "io.swagger.annotations.ApiOperation",
+                "attrs": [{ "attrValue": "更新", "attrName": "value" }]
+            }]
+        }]
+    }
+}
+```
+
+其他请参考test下实例

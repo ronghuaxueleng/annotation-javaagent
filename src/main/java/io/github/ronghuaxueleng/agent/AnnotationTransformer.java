@@ -7,6 +7,7 @@ import io.github.ronghuaxueleng.entity.BeanAnnotationAttr;
 import io.github.ronghuaxueleng.entity.ClassMethod;
 import io.github.ronghuaxueleng.entity.Controller;
 import io.github.ronghuaxueleng.utils.AnnotationUtils;
+import io.github.ronghuaxueleng.utils.CommandLineUtils;
 import javassist.ClassPool;
 import javassist.CtClass;
 
@@ -72,7 +73,11 @@ public class AnnotationTransformer implements ClassFileTransformer {
           AnnotationUtils.get().addMethodAnnotatioinFieldValue(ctClass, url.getMethod(), name, attrs);
         }
       }
-      ctClass.writeFile("E:/test");
+
+      String savedClassDirPath = CommandLineUtils.cmdLine.getOptionValue("d");
+      if (savedClassDirPath != null) {
+        ctClass.writeFile(savedClassDirPath);
+      }
       // 返回新的字节码
       return ctClass.toBytecode();
     } catch (Exception e) {

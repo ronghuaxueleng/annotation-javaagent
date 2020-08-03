@@ -1,12 +1,16 @@
 package io.github.ronghuaxueleng.agent;
 
 import com.google.gson.Gson;
+import io.github.ronghuaxueleng.utils.CommandLineUtils;
+import org.apache.commons.cli.*;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
 import java.io.File;
 import java.io.InputStream;
 import java.lang.instrument.Instrumentation;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Map;
 
 /**
@@ -18,11 +22,14 @@ public class PreMainTraceAgent {
   /**
    * JavaAgent启动时调用的方法
    *
-   * @param filePath
+   * @param args            参数
    * @param instrumentation
    */
-  public static void premain(String filePath, Instrumentation instrumentation) {
-    System.out.println("urls.json filePath : " + filePath);
+  public static void premain(String args, Instrumentation instrumentation) throws ParseException {
+    //解析参数
+    CommandLineUtils.parseArg(args);
+    String filePath = CommandLineUtils.cmdLine.getOptionValue("f");
+    System.out.println("注解文件路径 : " + filePath);
     try {
       InputStream resourceAsStream = PreMainTraceAgent.class.getResourceAsStream(filePath);
       byte[] prifileContent;
@@ -33,11 +40,11 @@ public class PreMainTraceAgent {
       }
       String json = new String(prifileContent);
       Gson gson = new Gson();
-      Map<String, Object> jsonMap = gson.fromJson(json, Map.class);
+      Map jsonMap = gson.fromJson(json, Map.class);
       // instrumentation 中包含了项目中的全部类。每加载一次.class文件就运行一次
       instrumentation.addTransformer(new AnnotationTransformer(jsonMap), true);
     } catch (Exception e) {
-      e.printStackTrace();
+      System.out.println(e.getMessage());
     }
   }
 }

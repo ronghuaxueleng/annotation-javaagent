@@ -2,15 +2,13 @@ package io.github.ronghuaxueleng.agent;
 
 import com.google.gson.Gson;
 import io.github.ronghuaxueleng.utils.CommandLineUtils;
-import org.apache.commons.cli.*;
+import org.apache.commons.cli.ParseException;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
 import java.io.File;
 import java.io.InputStream;
 import java.lang.instrument.Instrumentation;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Map;
 
 /**

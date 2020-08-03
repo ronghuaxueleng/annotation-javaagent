@@ -2,10 +2,6 @@ package io.github.ronghuaxueleng.utils;
 
 import org.apache.commons.cli.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * @author: caoqiang
  * @create: 2020/8/3 0003 下午 16:45

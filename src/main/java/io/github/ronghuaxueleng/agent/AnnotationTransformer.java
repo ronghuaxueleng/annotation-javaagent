@@ -19,12 +19,15 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Logger;
 
 /**
  * @author: caoqiang
  * @create: 2020/7/31 0031 下午 15:00
  **/
 public class AnnotationTransformer implements ClassFileTransformer {
+
+  private static Logger logger = Logger.getAnonymousLogger();
 
   private final Map<String, Object> jsonMap;
 
@@ -81,8 +84,7 @@ public class AnnotationTransformer implements ClassFileTransformer {
       // 返回新的字节码
       return ctClass.toBytecode();
     } catch (Exception e) {
-      e.printStackTrace();
-      System.out.println(e.getMessage());
+      logger.info(e.getMessage());
     }
     return new byte[0];
   }

@@ -11,11 +11,14 @@ import javassist.bytecode.annotation.*;
 
 import java.lang.reflect.Method;
 import java.util.*;
+import java.util.logging.Logger;
 
 /**
  * 注解中属性修改、查看工具
  */
 public class AnnotationUtils {
+
+  private static Logger logger = Logger.getAnonymousLogger();
 
   private static AnnotationUtils mInstance;
   private final Gson gson = new Gson();
@@ -62,11 +65,11 @@ public class AnnotationUtils {
             returnTypeFieldList.add(returnTypeField);
           }
         } catch (NotFoundException e) {
-          System.out.println(e.getMessage());
+          logger.info(e.getMessage());
         }
       }
     } catch (NotFoundException e) {
-      System.out.println(e.getMessage());
+      logger.info(e.getMessage());
     }
     return returnTypeFieldList;
   }
@@ -214,7 +217,8 @@ public class AnnotationUtils {
       Annotation annotation = new Annotation(annoName, constPool);
       attr.addAnnotation(getAnnotation(constPool, annotation, attrs));
       methodInfo.addAttribute(attr);
-    } catch (NotFoundException ignored) {
+    } catch (NotFoundException e) {
+      logger.info(e.getMessage());
     }
   }
 
@@ -406,7 +410,7 @@ public class AnnotationUtils {
         params.put(paramNames[i], parameterTypes[i]);
       }
     } catch (Exception e) {
-      e.printStackTrace();
+      logger.info(e.getMessage());
     }
     return params;
   }
@@ -455,7 +459,7 @@ public class AnnotationUtils {
         }
       }
     } catch (Exception e) {
-      System.out.println("getMethodVariableName fail " + e);
+      logger.info("getMethodVariableName fail " + e);
     }
     return list;
   }

@@ -18,7 +18,7 @@ import java.util.*;
 public class AnnotationUtils {
 
   private static AnnotationUtils mInstance;
-  private Gson gson = new Gson();
+  private final Gson gson = new Gson();
 
   public AnnotationUtils() {
   }
@@ -199,20 +199,23 @@ public class AnnotationUtils {
     addMethodAnnotatioinFieldValue(cc, methodName, annoName, fieldName, new StringMemberValue(fieldValue, constPool));
   }
 
-  public void addMethodAnnotatioinFieldValue(CtClass cc, String methodName, String annoName, List<BeanAnnotationAttr> attrs) throws NotFoundException {
+  public void addMethodAnnotatioinFieldValue(CtClass cc, String methodName, String annoName, List<BeanAnnotationAttr> attrs) {
     if (cc.isFrozen()) {
       cc.defrost();
     }
-    CtMethod ctMethod = cc.getDeclaredMethod(methodName);
-    MethodInfo methodInfo = ctMethod.getMethodInfo();
-    ConstPool constPool = methodInfo.getConstPool();
-    AnnotationsAttribute attr = (AnnotationsAttribute) methodInfo.getAttribute(AnnotationsAttribute.visibleTag);
-    if (attr == null) {
-      attr = new AnnotationsAttribute(constPool, AnnotationsAttribute.visibleTag);
+    try {
+      CtMethod ctMethod = cc.getDeclaredMethod(methodName);
+      MethodInfo methodInfo = ctMethod.getMethodInfo();
+      ConstPool constPool = methodInfo.getConstPool();
+      AnnotationsAttribute attr = (AnnotationsAttribute) methodInfo.getAttribute(AnnotationsAttribute.visibleTag);
+      if (attr == null) {
+        attr = new AnnotationsAttribute(constPool, AnnotationsAttribute.visibleTag);
+      }
+      Annotation annotation = new Annotation(annoName, constPool);
+      attr.addAnnotation(getAnnotation(constPool, annotation, attrs));
+      methodInfo.addAttribute(attr);
+    } catch (NotFoundException ignored) {
     }
-    Annotation annotation = new Annotation(annoName, constPool);
-    attr.addAnnotation(getAnnotation(constPool, annotation, attrs));
-    methodInfo.addAttribute(attr);
   }
 
   public void addMethodAnnotatioinFieldValue(CtClass cc, String methodName, String annoName, String fieldName, Object fieldValue) throws NotFoundException {

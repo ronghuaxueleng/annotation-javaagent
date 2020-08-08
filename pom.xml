@@ -45,6 +45,11 @@
 			<artifactId>commons-cli</artifactId>
 			<version>1.4</version>
 		</dependency>
+		<dependency>
+			<groupId>io.github.ronghuaxueleng</groupId>
+			<artifactId>annotation-utils</artifactId>
+			<version>${lastVersion}</version>
+		</dependency>
 
 	</dependencies>
 

@@ -2,11 +2,11 @@ package io.github.ronghuaxueleng.agent;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import io.github.ronghuaxueleng.entity.BeanAnnotation;
-import io.github.ronghuaxueleng.entity.BeanAnnotationAttr;
-import io.github.ronghuaxueleng.entity.ClassMethod;
-import io.github.ronghuaxueleng.entity.Controller;
-import io.github.ronghuaxueleng.utils.AnnotationUtils;
+import io.github.ronghuaxueleng.annotation.entity.BeanAnnotation;
+import io.github.ronghuaxueleng.annotation.entity.BeanAnnotationAttr;
+import io.github.ronghuaxueleng.annotation.entity.ClassMethod;
+import io.github.ronghuaxueleng.annotation.entity.Controller;
+import io.github.ronghuaxueleng.utils.AnnotationUtil;
 import io.github.ronghuaxueleng.utils.CommandLineUtils;
 import javassist.ClassPool;
 import javassist.CtClass;
@@ -64,7 +64,7 @@ public class AnnotationTransformer implements ClassFileTransformer {
       for (BeanAnnotation annotation : classAnnotations) {
         String name = annotation.getName();
         List<BeanAnnotationAttr> attrs = annotation.getAttrs();
-        AnnotationUtils.get().addClassAnnotationFieldValue(ctClass, name, attrs);
+        AnnotationUtil.get().addClassAnnotationFieldValue(ctClass, name, attrs);
       }
 
       List<ClassMethod> urls = module.getList();
@@ -73,7 +73,7 @@ public class AnnotationTransformer implements ClassFileTransformer {
         for (BeanAnnotation annotation : methodAnnotations) {
           String name = annotation.getName();
           List<BeanAnnotationAttr> attrs = annotation.getAttrs();
-          AnnotationUtils.get().addMethodAnnotatioinFieldValue(ctClass, url.getMethod(), name, attrs);
+          AnnotationUtil.get().addMethodAnnotatioinFieldValue(ctClass, url.getMethod(), name, attrs);
         }
       }
 

@@ -28,8 +28,10 @@ public class CommandLineUtils {
     Options options = new Options();
     options.addOption("h", false, "使用帮助");
     options.addOption("help", false, "使用帮助");
-    options.addOption("f", true, "注解文件路径");
-    options.addOption("d", true, "调试时生成的class文件目录路径");
+    options.addOption("f", true, "注解文件路径,多个路径以分号(;)分割");
+    options.addOption("e", true, "调试时生成的class文件目录路径");
+    options.addOption("d", true, "debug模式，会显示报错信息");
+
 
     //解析阶段
     CommandLineParser paraer = new DefaultParser();
@@ -48,7 +50,7 @@ public class CommandLineUtils {
   }
 
   public static void main(String[] args) throws ParseException {
-    String[] strings = translateCommandline("-f=Value");
+    String[] strings = translateCommandline("-f=Value;v1");
     for (String string : strings) {
       System.out.println(string);
     }

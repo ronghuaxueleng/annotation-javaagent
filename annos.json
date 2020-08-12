@@ -1,16 +1,64 @@
-{
-    "test": {
-        "fullClassName": "io.github.ronghuaxueleng.test.Test",
-        "annotations": [{
-            "name": "io.swagger.annotations.Api",
-            "attrs": [{ "attrValue": ["专病应用"], "attrName": "tags" }]
-        }],
-        "list": [{
-            "method": "update",
-            "annotations": [{
-                "name": "io.swagger.annotations.ApiOperation",
-                "attrs": [{ "attrValue": "更新", "attrName": "value" }]
-            }]
-        }]
-    }
-}
+[
+  {
+    "fullClassName": "io.github.ronghuaxueleng.test.Test",
+    "annotations": [
+      {
+        "name": "io.swagger.annotations.Api",
+        "attrs": [
+          {
+            "attrValue": [
+              "专病应用"
+            ],
+            "attrName": "tags"
+          }
+        ]
+      }
+    ],
+    "methodList": [
+      {
+        "method": "update",
+        "annotations": [
+          {
+            "name": "io.swagger.annotations.ApiOperation",
+            "attrs": [
+              {
+                "attrValue": "更新",
+                "attrName": "value"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "fieldList": [
+      {
+        "field": "password",
+        "annotations": [
+          {
+            "name": "io.swagger.annotations.ApiModelProperty",
+            "attrs": [
+              {
+                "attrValue": "password",
+                "attrName": "value"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "field": "phone",
+        "annotations": [
+          {
+            "name": "io.swagger.annotations.ApiModelProperty",
+            "attrs": [
+              {
+                "attrValue": "phone",
+                "attrName": "value"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

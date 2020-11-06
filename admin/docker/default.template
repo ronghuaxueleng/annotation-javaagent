@@ -1,0 +1,14 @@
+server {
+    listen       80;
+    server_name  code-builder;
+     client_max_body_size 20G;
+
+    location / {
+        root   /app/html;
+        index  index.html index.htm;
+    }
+
+    location ${BACKEND_PATH} {
+        proxy_pass ${BACKEND_URL};
+    }
+}

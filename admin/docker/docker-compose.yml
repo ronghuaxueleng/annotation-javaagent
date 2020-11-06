@@ -1,0 +1,11 @@
+version: "2.4"
+services:
+  code-builder:
+    container_name: code-builder
+    build: ./
+    image: code-builder:nginx
+    ports:
+      - 8787:80
+    environment:
+      BACKEND_URL: http://172.16.20.51:7878/
+      BACKEND_PATH: /prod-api/

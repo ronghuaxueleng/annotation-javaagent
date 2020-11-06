@@ -1,4 +1,4 @@
 export { default as Navbar }
-from "./Navbar";
+  from './Navbar'
 export { default as AppMain }
-from "./AppMain";
+  from './AppMain'

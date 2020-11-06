@@ -1,7 +1,7 @@
 {
-  "name": "code-builder",
+  "name": "annottion-javaagent-builder-admin",
   "version": "4.4.0",
-  "description": "代码生成器",
+  "description": "java注解生成器管理端",
   "scripts": {
     "dev": "vue-cli-service serve",
     "build:prod": "vue-cli-service build",

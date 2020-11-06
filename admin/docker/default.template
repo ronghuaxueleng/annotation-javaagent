@@ -1,14 +1,19 @@
 server {
     listen       80;
-    server_name  code-builder;
+    server_name  annottion-javaagent-builder-admin;
      client_max_body_size 20G;
 
     location / {
         root   /app/html;
+        try_files $uri $uri/ /index.html;
         index  index.html index.htm;
     }
 
     location ${BACKEND_PATH} {
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header REMOTE-HOST $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_pass ${BACKEND_URL};
     }
 }

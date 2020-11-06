@@ -1,9 +1,9 @@
 version: "2.4"
 services:
   code-builder:
-    container_name: code-builder
+    container_name: annottion-javaagent-builder-admin
     build: ./
-    image: code-builder:nginx
+    image: annottion-javaagent-builder-admin:nginx
     ports:
       - 8787:80
     environment:
